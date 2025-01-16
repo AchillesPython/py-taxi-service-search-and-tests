@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from taxi.forms import DriverCreationForm
 
 
@@ -8,7 +9,7 @@ class FormsTest(TestCase):
             "username": "wickjohn",
             "password1": "StrongPass123!",
             "password2": "StrongPass123!",
-            "first_name": "john",
+            "first_name": "jonh",
             "last_name": "wick",
             "license_number": "JWL12345"
         }
@@ -20,12 +21,12 @@ class FormsTest(TestCase):
         form_data = {
             "username": "wickjohn",
             "password1": "test123",
-            "password2": "test123",
+            "password2": "test321",
             "first_name": "",
             "last_name": "",
             "license_number": "short"
         }
         form = DriverCreationForm(data=form_data)
         self.assertFalse(form.is_valid())
-        self.asserIn("password2", form.errors)
-        self.asserIn("license_number", form.errors)
+        self.assertIn("password2", form.errors)
+        self.assertIn("license_number", form.errors)
